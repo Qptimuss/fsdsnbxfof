@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doğum Günün Kutlu Olsun! 🎉</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Ambient Animated Background -->
+    <div class="ambient-background">
+        <div class="gradient-sphere sphere-1"></div>
+        <div class="gradient-sphere sphere-2"></div>
+        <div class="gradient-sphere sphere-3"></div>
+        <div id="particles-container"></div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="app-container">
+        <!-- Audio / Settings Toggle Bar -->
+        <header class="top-bar">
+            <button id="btn-sound-toggle" class="icon-btn" title="Ses Aç/Kapat">
+                <span id="sound-icon">🔊</span>
+            </button>
+            <button id="btn-settings-toggle" class="icon-btn rounded-square-btn" title="Ayarlar">
+                <span>⚙️</span>
+            </button>
+        </header>
+
+        <!-- STAGE 1: CHARACTER INTRO & BORDERLESS RPG DIALOGUE -->
+        <section id="stage-intro" class="stage active">
+            <!-- Standalone Floating Character Avatar -->
+            <div class="rpg-character-header">
+                <div id="character-avatar" class="character-avatar">🧙‍♂️</div>
+            </div>
+
+            <!-- RPG Dialogue Box Window Below Character -->
+            <div class="rpg-dialogue-window">
+                <!-- Main Dialogue Frame -->
+                <div id="rpg-dialogue-box" class="rpg-dialogue-box">
+                    <!-- Typewriter Text Container -->
+                    <div class="rpg-speech-area">
+                        <p id="dialogue-text" class="dialogue-text">Yükleniyor...</p>
+                        <div id="rpg-arrow" class="rpg-arrow">▼</div>
+                    </div>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="rpg-action-bar">
+                    <span class="rpg-hint-text">💡 İlerlemek için metne veya butona tıkla</span>
+                    <button id="btn-next-dialogue" class="btn btn-primary rpg-btn">
+                        <span id="btn-next-label">Devam Et</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAGE 2: BIRTHDAY CAKE & CANDLES -->
+        <section id="stage-cake" class="stage hidden">
+            <div class="stage-header">
+                <h2 class="stage-title">Mumlarını Üfle! 🎂</h2>
+                <p id="cake-instruction" class="stage-subtitle">Mumların üzerine tıklayarak üfle (veya dokun)!</p>
+            </div>
+
+            <div class="cake-container">
+                <div class="cake">
+                    <div class="plate"></div>
+                    <div class="layer layer-bottom"></div>
+                    <div class="layer layer-middle"></div>
+                    <div class="layer layer-top">
+                        <div class="icing"></div>
+                    </div>
+                    <!-- Candles will be generated via JS -->
+                    <div id="candles-holder" class="candles-holder"></div>
+                </div>
+            </div>
+
+            <div id="cake-action-bar" class="action-bar hidden">
+                <button id="btn-finish-cake" class="btn btn-accent glow-btn">
+                    <span>Sürprizi Gör 🎁</span>
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- STAGE 3: FRIEND PROFILE CARD -->
+        <section id="stage-card" class="stage hidden">
+            <div class="friend-card glass-card">
+                <div class="card-badge">✨ Günün Kahramanı ✨</div>
+                <div class="card-avatar-wrapper">
+                    <div id="friend-avatar" class="friend-avatar">🎂</div>
+                    <div class="sparkle-ring"></div>
+                </div>
+                <h1 id="friend-name" class="friend-name">Ahmet</h1>
+                <p class="card-subtitle">İyi Ki Doğdun!</p>
+
+                <div class="traits-container">
+                    <h3 class="section-label">Super Güçleri & Özellikleri</h3>
+                    <div id="traits-list" class="traits-chips">
+                        <!-- Traits loaded dynamically -->
+                    </div>
+                </div>
+
+                <div class="message-box hidden" id="message-box">
+                    <p id="friend-message" class="message-text"></p>
+                </div>
+
+                <button id="btn-to-countdown" class="btn btn-primary full-width">
+                    <span>Devam Et ➔</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- STAGE 3.5: ENDING DIALOGUES -->
+        <section id="stage-ending" class="stage hidden">
+            <!-- Standalone Floating Character Avatar -->
+            <div class="rpg-character-header">
+                <div id="ending-character-avatar" class="character-avatar">🧙‍♂️</div>
+            </div>
+
+            <!-- RPG Dialogue Box Window Below Character -->
+            <div class="rpg-dialogue-window">
+                <!-- Main Dialogue Frame -->
+                <div id="ending-rpg-dialogue-box" class="rpg-dialogue-box">
+                    <!-- Typewriter Text Container -->
+                    <div class="rpg-speech-area">
+                        <p id="ending-dialogue-text" class="dialogue-text">Yükleniyor...</p>
+                        <div id="ending-rpg-arrow" class="rpg-arrow">▼</div>
+                    </div>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="rpg-action-bar">
+                    <span class="rpg-hint-text">💡 İlerlemek için metne veya butona tıkla</span>
+                    <button id="btn-next-ending-dialogue" class="btn btn-primary rpg-btn">
+                        <span id="btn-ending-next-label">Devam Et</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAGE 4: NEXT BIRTHDAY COUNTDOWN -->
+        <section id="stage-countdown" class="stage hidden">
+            <div class="countdown-wrapper glass-card">
+                <div class="countdown-header">
+                    <div class="party-icon">🎈</div>
+                    <h2>Bir Sonraki Doğum Günün İçin Geri Sayım</h2>
+                    <p id="countdown-target-text">Gelecek yaşın için geri sayım başladı!</p>
+                </div>
+
+                <div class="countdown-grid">
+                    <div class="time-card">
+                        <span id="days" class="time-val">00</span>
+                        <span class="time-label">GÜN</span>
+                    </div>
+                    <div class="time-card">
+                        <span id="hours" class="time-val">00</span>
+                        <span class="time-label">SAAT</span>
+                    </div>
+                    <div class="time-card">
+                        <span id="minutes" class="time-val">00</span>
+                        <span class="time-label">DAKİKA</span>
+                    </div>
+                    <div class="time-card">
+                        <span id="seconds" class="time-val">00</span>
+                        <span class="time-label">SANİYE</span>
+                    </div>
+                </div>
+
+                <div class="countdown-actions">
+                    <button id="btn-confetti" class="btn btn-accent">
+                        <span>Konfeti Patlat! 🎉</span>
+                    </button>
+                    <button id="btn-replay" class="btn btn-secondary">
+                        <span>Baştan İzle 🔄</span>
+                    </button>
+                </div>
+
+                <!-- Reklam Vakti & Music Player Section -->
+                <div class="promo-section">
+                    <h3 class="promo-title">reklam vakti :D</h3>
+                    <p class="promo-desc">siteye bir şeyler daha ekliyim dedim aklıma kendi spotify hesabımı paylaşmak geldi :D</p>
+                    
+                    <!-- Custom Music Player -->
+                    <div class="music-player-box">
+                        <div class="track-info">
+                            <span class="music-icon font-icon">🎵</span>
+                            <span id="current-track-name" class="track-title">FIFTY FIFTY - Cupid</span>
+                        </div>
+
+                        <div class="player-controls">
+                            <button id="btn-prev-track" class="player-btn" title="Önceki Şarkı">⏮️</button>
+                            <button id="btn-play-pause-track" class="player-btn play-btn" title="Oynat / Durdur">▶️</button>
+                            <button id="btn-next-track" class="player-btn" title="Sonraki Şarkı">⏭️</button>
+                        </div>
+
+                        <div class="player-volume-row">
+                            <span>🔊</span>
+                            <input type="range" id="player-volume-slider" class="styled-slider" min="0" max="100" value="10">
+                            <span id="player-volume-text">10%</span>
+                        </div>
+                    </div>
+
+                    <p class="promo-spotify">
+                        Daha fazla bu tarz şarkılar için 
+                        <a href="https://open.spotify.com/user/31wjcdwngieyliqhlbbz2uxt4dam?si=3c4426dddba94f0a" target="_blank" rel="noopener noreferrer">
+                            https://open.spotify.com/user/31wjcdwngieyliqhlbbz2uxt4dam?si=3c4426dddba94f0a
+                        </a> 
+                        spotify profilime göz atabilirsin! :D
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Canvas for Confetti -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Celebration Audio (Danza Kuduro Önemli) -->
+    <audio id="celebration-audio" src="danza_kuduro_onemli.mp4" preload="auto"></audio>
+
+    <!-- SETTINGS MODAL OVERLAY -->
+    <div id="settings-modal" class="modal-overlay hidden">
+        <div class="settings-card glass-modal">
+            <div class="modal-header">
+                <h3 class="modal-title">⚙️ Ayarlar</h3>
+                <button id="btn-close-settings" class="modal-close-btn" title="Kapat">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Master Volume Control Slider -->
+                <div class="setting-item">
+                    <div class="setting-label-row">
+                        <span>🔊 Ses Seviyesi</span>
+                        <span id="volume-percentage" class="volume-val-badge">50%</span>
+                    </div>
+                    <input type="range" id="volume-slider" class="styled-slider" min="0" max="100" value="50">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
